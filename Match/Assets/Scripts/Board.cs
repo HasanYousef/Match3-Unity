@@ -39,10 +39,11 @@ public class Board : MonoBehaviour
     public void CutTailTill(Item last)
     {
         int lastIndex = SelectedItems.Count - 1;
-        while(lastIndex > 0 && SelectedItems[lastIndex] != last) {
+        while(lastIndex >= 0 && SelectedItems[lastIndex] != last) {
             SelectedItems.RemoveAt(lastIndex);
             lastIndex--;
         }
+        SFXManager.instance.PlaySFX(Clip.Cut);
         refreshColors();
     }
 
@@ -74,7 +75,7 @@ public class Board : MonoBehaviour
                 newItem.Index = new Vector2(x, y);
 				items[x, y] = newItem;
 
-				Sprite newSprite = characters[Random.Range(0, characters.Count)];
+				Sprite newSprite = characters[Random.Range(1, characters.Count)];
 				newItem.GetComponent<Image>().sprite = newSprite;
 				//newItem.GetComponent<Transform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
             }
@@ -83,7 +84,10 @@ public class Board : MonoBehaviour
 
     public void Match()
     {
-        Debug.Log("MATCH " + SelectedItems.Count);
+        foreach(Item selected in SelectedItems){
+            items[(int)selected.Index.x, (int)selected.Index.y].FlyAway();
+        }
+        SFXManager.instance.PlaySFX(Clip.Match);
         clearSelectedItems();
     }
 }
