@@ -18,7 +18,6 @@ public class Board : MonoBehaviour
     void Start()
     {
         instance = GetComponent<Board>();
-        ySize *= 2;
         Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
         SelectedItems = new List<Item>();
         CreateBoard(offset.x, offset.y);
@@ -51,8 +50,10 @@ public class Board : MonoBehaviour
     {
         for (int x = 0; x < xSize; x++) {
 			for (int y = 0; y < ySize; y++) {
-                items[x, y].changeColor();
-                items[x, y].GetComponent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                if(items[x, y] != null) {
+                    items[x, y].changeColor();
+                    items[x, y].GetComponent<Transform>().localScale = new Vector3(1f, 1f, 1f);
+                }
             }
         }
         Path.instance.Clear();
@@ -73,11 +74,9 @@ public class Board : MonoBehaviour
                 Item newItem = Instantiate(item, new Vector3(startX - 325 + (xOffset * x), startY - 325  + (yOffset * y), 0), item.transform.rotation);
 				newItem.transform.parent = transform;
                 newItem.Index = new Vector2(x, y);
-				items[x, y] = newItem;
-
 				Sprite newSprite = characters[Random.Range(1, characters.Count)];
 				newItem.GetComponent<Image>().sprite = newSprite;
-				//newItem.GetComponent<Transform>().localScale = new Vector3(0.6f, 0.6f, 0.6f);
+				items[x, y] = newItem;
             }
         }
     }
@@ -85,9 +84,52 @@ public class Board : MonoBehaviour
     public void Match()
     {
         foreach(Item selected in SelectedItems){
-            items[(int)selected.Index.x, (int)selected.Index.y].FlyAway();
+            Vector2 index = selected.Index;
+            items[(int)index.x, (int)index.y].FlyAway();
+            items[(int)index.x, (int)index.y] = null;
         }
         SFXManager.instance.PlaySFX(Clip.Match);
         clearSelectedItems();
+        ShiftBoard();
+    }
+
+    private void ShiftBoard()
+    {
+        IsShifting = true;
+        for(int x = 0; x < xSize; x++) {
+            ShiftColumn(x);
+        }
+    }
+
+    private void ShiftColumn(int x)
+    {
+        int gapPointer = -1;
+        for(int y = 0; y < ySize; y++) {
+            if(items[x,y] == null || items[x,y].GetComponent<Image>().sprite == characters[0]){
+                if(gapPointer == -1){
+                    gapPointer = y;
+                }
+            }
+            else if(gapPointer != -1) {
+                items[x,gapPointer] = items[x,y];
+                items[x,y] = null;
+                gapPointer++;
+            }
+        }
+        if(gapPointer == -1) return;
+        
+        float startX = transform.position.x;
+		float startY = transform.position.y;
+        Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
+
+        int zz = 1;
+        for(int y = gapPointer; y < ySize; y++) {
+            Item newItem = Instantiate(item, new Vector3(startX - 325 + (offset.x * x), startY - 325  + (offset.y * (ySize + y - gapPointer)), 0), item.transform.rotation);
+            newItem.transform.parent = transform;
+            newItem.Index = new Vector2(x, y);
+            Sprite newSprite = characters[Random.Range(1, characters.Count)];
+            newItem.GetComponent<Image>().sprite = newSprite;
+            items[x,y] = newItem;
+        }
     }
 }

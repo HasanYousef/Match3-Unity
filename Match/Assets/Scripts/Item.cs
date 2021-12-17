@@ -9,11 +9,12 @@ public class Item : MonoBehaviour {
 	private float FlyAwaySpeed;
 	[SerializeField]
 	private Vector3 FlyingDestination;
+	public Vector3 ShiftDestination { get; set; }
 
     private Image img;
     public Vector2 Index { get; set; }
 
-	private bool IsFlying = false;
+	public bool IsFlying { get; set; } = false;
 
 	void Awake() {
 		img = GetComponent<Image>();
@@ -71,6 +72,7 @@ public class Item : MonoBehaviour {
 		if (Board.instance.IsShifting) return;
 		
 		List<Item> selectedItems = Board.instance.SelectedItems;
+		if (selectedItems.Count == 0) return;
 		Item tail = selectedItems[selectedItems.Count - 1];
 		Vector2 dist = Index - tail.Index;
 		bool isNeighbourSelected = !(dist.x > 1 || dist.x < -1 || dist.y > 1 || dist.y < -1);
@@ -86,6 +88,10 @@ public class Item : MonoBehaviour {
 
 	public void changeColor() 
 	{
+		if(IsFlying) {
+			img.color = Color.white;
+			return;
+		}
 		List<Item> selectedItems = Board.instance.SelectedItems;
 		bool isDark = selectedItems.Count > 0;
 		foreach(Item selectedItem in selectedItems){
