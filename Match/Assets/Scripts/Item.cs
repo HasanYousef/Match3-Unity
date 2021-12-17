@@ -8,13 +8,16 @@ public class Item : MonoBehaviour {
 	[SerializeField]
 	private float FlyAwaySpeed;
 	[SerializeField]
+	private float ShiftingSpeed;
+	[SerializeField]
 	private Vector3 FlyingDestination;
-	public Vector3 ShiftDestination { get; set; }
+	private float YShiftDestination;
 
     private Image img;
     public Vector2 Index { get; set; }
 
 	public bool IsFlying { get; set; } = false;
+	public bool IsShifting { get; set; } = false;
 
 	void Awake() {
 		img = GetComponent<Image>();
@@ -22,12 +25,24 @@ public class Item : MonoBehaviour {
     }
 
 	void Update() {
-		if(transform.position.y > FlyingDestination.y)
-			IsFlying = false;
 		if(IsFlying){
-			Vector3 dir = (FlyingDestination - transform.position).normalized;
-			float dist = FlyingDestination.y - transform.position.y;
-			transform.position += dir * (dist * FlyAwaySpeed) * Time.deltaTime;
+			if(transform.position.y > FlyingDestination.y - 80){
+				Object.Destroy(this.gameObject);
+			}
+			else{
+				Vector3 dir = (FlyingDestination - transform.position).normalized;
+				float dist = FlyingDestination.y - transform.position.y;
+				transform.position += dir * (dist * FlyAwaySpeed) * Time.deltaTime;
+			}
+		}
+		if(IsShifting){
+			if(YShiftDestination >= transform.position.y){
+				IsShifting = false;
+				Board.instance.ItemFinishedShifting();
+			}
+			else {
+				transform.position -= new Vector3(0, 300 * ShiftingSpeed * Time.deltaTime, 0);
+			}
 		}
     }
 
@@ -56,7 +71,7 @@ public class Item : MonoBehaviour {
 		if (Board.instance.IsShifting) return;
 
 		if(InPath()) {
-			if (IsHead()) {
+			if(IsHead()) {
 				Deselect();
 			} else {
 				Board.instance.Match();
@@ -86,7 +101,7 @@ public class Item : MonoBehaviour {
 		}
 	}
 
-	public void changeColor() 
+	public void changeColor()
 	{
 		if(IsFlying) {
 			img.color = Color.white;
@@ -97,10 +112,10 @@ public class Item : MonoBehaviour {
 		foreach(Item selectedItem in selectedItems){
 			if(!isDark) break;
 			Vector2 dist = Index - selectedItem.Index;
-			isDark = (img.sprite != selectedItem.GetComponent<Image>().sprite) 
-				|| (dist.x > 1 || dist.x < -1 || dist.y > 1 || dist.y < -1);
+			isDark = (img.sprite != selectedItem.GetComponent<Image>().sprite);
 		}
 		img.color = isDark ? darkColor : Color.white;
+		transform.localScale = isDark ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1f, 1f, 1f);
 	}
 
 	public void FlyAway()
@@ -109,4 +124,12 @@ public class Item : MonoBehaviour {
 		IsFlying = true;
 	}
 
+	public bool SetYShiftDestination(float y)
+	{
+		if(y != transform.position.y){
+			IsShifting = true;
+			YShiftDestination = y;
+		}
+		return IsShifting;
+	}
 }

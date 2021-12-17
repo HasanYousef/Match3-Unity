@@ -15,6 +15,8 @@ public class Board : MonoBehaviour
     public List<Item> SelectedItems { get; set; }
     public bool IsShifting { get; set; }
 
+    private int ShiftingsCount = 0;
+
     void Start()
     {
         instance = GetComponent<Board>();
@@ -52,7 +54,6 @@ public class Board : MonoBehaviour
 			for (int y = 0; y < ySize; y++) {
                 if(items[x, y] != null) {
                     items[x, y].changeColor();
-                    items[x, y].GetComponent<Transform>().localScale = new Vector3(1f, 1f, 1f);
                 }
             }
         }
@@ -103,7 +104,11 @@ public class Board : MonoBehaviour
 
     private void ShiftColumn(int x)
     {
+        float startX = transform.position.x;
+		float startY = transform.position.y;
+        Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
         int gapPointer = -1;
+
         for(int y = 0; y < ySize; y++) {
             if(items[x,y] == null || items[x,y].GetComponent<Image>().sprite == characters[0]){
                 if(gapPointer == -1){
@@ -112,24 +117,34 @@ public class Board : MonoBehaviour
             }
             else if(gapPointer != -1) {
                 items[x,gapPointer] = items[x,y];
+                items[x,gapPointer].Index = new Vector2(x,gapPointer);
+                if(items[x,gapPointer].SetYShiftDestination(startY - 325  + (offset.y * gapPointer))) {
+                    ShiftingsCount++;
+                }
                 items[x,y] = null;
                 gapPointer++;
             }
         }
-        if(gapPointer == -1) return;
-        
-        float startX = transform.position.x;
-		float startY = transform.position.y;
-        Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
 
-        int zz = 1;
+        if(gapPointer == -1) return;
+
         for(int y = gapPointer; y < ySize; y++) {
             Item newItem = Instantiate(item, new Vector3(startX - 325 + (offset.x * x), startY - 325  + (offset.y * (ySize + y - gapPointer)), 0), item.transform.rotation);
             newItem.transform.parent = transform;
             newItem.Index = new Vector2(x, y);
             Sprite newSprite = characters[Random.Range(1, characters.Count)];
             newItem.GetComponent<Image>().sprite = newSprite;
+            if(newItem.SetYShiftDestination(startY - 325  + (offset.y * y))){
+                ShiftingsCount++;
+            }
             items[x,y] = newItem;
         }
+    }
+
+    public void ItemFinishedShifting()
+    {
+        ShiftingsCount--;
+        if(ShiftingsCount == 0)
+            IsShifting = false;
     }
 }
