@@ -21,7 +21,7 @@ public class Path : MonoBehaviour
     public void AddPoint(Vector3 newPosition)
     {
         lr.positionCount++;
-        lr.SetPosition(lr.positionCount - 1, new Vector3((newPosition.x / 1.14f) - 2.15f, (newPosition.y / 1.14f) - 4.1f, 0));
+        lr.SetPosition(lr.positionCount - 1, new Vector3((newPosition.x * 1.12f) - 9.9f, (newPosition.y * 1.12f) - 8.8f, 0f));
     }
 
     public void Clear()
