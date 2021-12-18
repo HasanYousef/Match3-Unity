@@ -22,6 +22,7 @@ public class Board : MonoBehaviour
         instance = GetComponent<Board>();
         Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
         SelectedItems = new List<Item>();
+        Debug.Log(offset);
         CreateBoard(offset.x, offset.y);
     }
 

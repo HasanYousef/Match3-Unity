@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Clip { Theme, Select, Hover, Cut, Match };
+public enum Clip { Theme, StartGame, Select, Hover, Cut, Match };
 
 public class SFXManager : MonoBehaviour {
 	public static SFXManager instance;

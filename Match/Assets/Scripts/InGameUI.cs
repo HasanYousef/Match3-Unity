@@ -4,13 +4,11 @@ using UnityEngine;
 
 public class InGameUI : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
+	public static InGameUI instance;
 
-    void Update()
-    {
-        
+	void Start () {
+		instance = GetComponent<InGameUI>();
+        this.name = "InGameUI";
+        SFXManager.instance.PlaySFX(Clip.StartGame);
     }
 }
