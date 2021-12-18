@@ -17,6 +17,7 @@ public class Item : MonoBehaviour {
     public Vector2 Index { get; set; }
 
 	public bool IsFlying { get; set; } = false;
+	private Vector3 OriginalPosition;
 	public bool IsShifting { get; set; } = false;
 
 	void Awake() {
@@ -32,7 +33,10 @@ public class Item : MonoBehaviour {
 			else{
 				Vector3 dir = (FlyingDestination - transform.position).normalized;
 				float dist = FlyingDestination.y - transform.position.y;
+				float origDist = FlyingDestination.y - OriginalPosition.y;
 				transform.position += dir * (dist * FlyAwaySpeed) * Time.deltaTime;
+				float scale = dist / origDist + 0.2f;
+				transform.localScale = new Vector3(scale, scale, scale);
 			}
 		}
 		if(IsShifting){
@@ -122,6 +126,7 @@ public class Item : MonoBehaviour {
 	{
 		transform.parent = GameObject.Find("Canvas").GetComponent<Transform>();
 		IsFlying = true;
+		OriginalPosition = transform.position;
 	}
 
 	public bool SetYShiftDestination(float y)

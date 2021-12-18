@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FlyAwaySpeed: 4
   ShiftingSpeed: 3
-  FlyingDestination: {x: 300, y: 1300, z: 0}
+  FlyingDestination: {x: 130, y: 1400, z: 0}
 --- !u!61 &312160787683476482
 BoxCollider2D:
   m_ObjectHideFlags: 0
