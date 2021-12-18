@@ -124,7 +124,7 @@ public class Item : MonoBehaviour {
 
 	public void FlyAway()
 	{
-		transform.parent = GameObject.Find("Canvas").GetComponent<Transform>();
+		transform.parent = GameObject.Find("InGameUI").GetComponent<Transform>();
 		IsFlying = true;
 		OriginalPosition = transform.position;
 	}
