@@ -118,7 +118,7 @@ public class Item : MonoBehaviour {
 			Vector2 dist = Index - selectedItem.Index;
 			isDark = (img.sprite != selectedItem.GetComponent<Image>().sprite);
 		}
-		img.color = isDark ? darkColor : Color.white;
+		img.color = (isDark || Board.instance.CheckIfDisabled()) ? darkColor : Color.white;
 		transform.localScale = isDark ? new Vector3(0.8f, 0.8f, 0.8f) : new Vector3(1f, 1f, 1f);
 	}
 

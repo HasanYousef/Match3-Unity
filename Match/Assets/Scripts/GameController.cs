@@ -19,15 +19,16 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void Match(int numOfMatches){
+		Board.instance.setDisable(true);
 		Player.instance.Punch(numOfMatches);
 	}
 
 	public void FinishedMoving(){
-		Debug.Log("MOVE FINISH");
+		Board.instance.setDisable(false);
 	}
 
 	public void FinishedPunching(){
-		Debug.Log("PUNCH FINISH");
+		Board.instance.setDisable(false);
 	}
     
 }

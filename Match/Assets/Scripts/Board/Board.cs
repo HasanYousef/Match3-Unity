@@ -14,6 +14,7 @@ public class Board : MonoBehaviour
 
     public List<Item> SelectedItems { get; set; }
     public bool IsShifting { get; set; }
+    private bool IsDisabled = true;
 
     private int ShiftingsCount = 0;
 
@@ -80,6 +81,7 @@ public class Board : MonoBehaviour
 				items[x, y] = newItem;
             }
         }
+        refreshColors();
     }
 
     public void Match()
@@ -90,9 +92,10 @@ public class Board : MonoBehaviour
             items[(int)index.x, (int)index.y] = null;
         }
         SFXManager.instance.PlaySFX(Clip.Match);
-        GameController.instance.Match(SelectedItems.Count);
+        int numOfMatches = SelectedItems.Count;
         clearSelectedItems();
         ShiftBoard();
+        GameController.instance.Match(numOfMatches);
     }
 
     private void ShiftBoard()
@@ -147,5 +150,14 @@ public class Board : MonoBehaviour
         ShiftingsCount--;
         if(ShiftingsCount == 0)
             IsShifting = false;
+    }
+
+    public void setDisable(bool isdis){
+        IsDisabled = isdis;
+        refreshColors();
+    }
+
+    public bool CheckIfDisabled(){
+        return IsDisabled;
     }
 }
