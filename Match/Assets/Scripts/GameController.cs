@@ -13,8 +13,21 @@ public class GameController : MonoBehaviour {
 
 	public void StartGame()
 	{
-		Instantiate(inGameUI, new Vector3(0, 0, 0), inGameUI.transform.rotation);
 		StartMenuUI.instance.Leave();
+		Player.instance.StartMoving();
+		Instantiate(inGameUI, new Vector3(0, 0, 0), inGameUI.transform.rotation);
+	}
+
+	public void Match(int numOfMatches){
+		Player.instance.Punch(numOfMatches);
+	}
+
+	public void FinishedMoving(){
+		Debug.Log("MOVE FINISH");
+	}
+
+	public void FinishedPunching(){
+		Debug.Log("PUNCH FINISH");
 	}
     
 }

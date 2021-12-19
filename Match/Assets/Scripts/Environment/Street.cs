@@ -5,24 +5,24 @@ using UnityEngine;
 public class Street : MonoBehaviour
 {
 	public StreetChunk[] Chunks;
+	private List<StreetChunk> LoadedChunks;
     [SerializeField] private int ChunksPerLoad;
-    private int ChunksCount = 0;
-    
-    void Start()
-    {
-        LoadChunks();
-    }
 
-    void Update()
-    {
-        
+    void Start(){
+        LoadedChunks = new List<StreetChunk>();
+        AddChunk(0);
     }
 
     public void LoadChunks()
     {
         for(int i = 0; i < ChunksPerLoad; i++) {
-            StreetChunk newChunk = Instantiate(Chunks[i % Chunks.Length], new Vector3((i + ChunksCount) * 12, 0, 0), Chunks[i % Chunks.Length].transform.rotation);
-            newChunk.transform.parent = transform;
+            AddChunk(i % Chunks.Length);
         }
+    }
+
+    private void AddChunk(int type){
+        StreetChunk newChunk = Instantiate(Chunks[type], new Vector3(LoadedChunks.Count * 12, 0, 0), transform.parent.rotation);
+        newChunk.transform.parent = transform;
+        LoadedChunks.Add(newChunk);
     }
 }

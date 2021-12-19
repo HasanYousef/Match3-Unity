@@ -22,7 +22,6 @@ public class Board : MonoBehaviour
         instance = GetComponent<Board>();
         Vector2 offset = item.GetComponent<RectTransform>().sizeDelta;
         SelectedItems = new List<Item>();
-        Debug.Log(offset);
         CreateBoard(offset.x, offset.y);
     }
 
@@ -91,6 +90,7 @@ public class Board : MonoBehaviour
             items[(int)index.x, (int)index.y] = null;
         }
         SFXManager.instance.PlaySFX(Clip.Match);
+        GameController.instance.Match(SelectedItems.Count);
         clearSelectedItems();
         ShiftBoard();
     }
