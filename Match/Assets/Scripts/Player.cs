@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
         }
         if(IsPunching){
             if(PunchsRemaining > 0){
-                if(!animator.IsPlaying("Punch")){
+                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
                     animator.SetTrigger("Punch");
                     PunchsRemaining--;
                     Debug.Log("PUNCH");
@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
             else{
                 IsPunching = false;
                 GameController.instance.FinishedPunching();
+                animator.SetTrigger("FinishedPunching");
             }
         }
     }
