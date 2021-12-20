@@ -5,8 +5,8 @@ using UnityEngine;
 public class Environment : MonoBehaviour
 {
     public static Environment instance;
-    [SerializeField] private Street street;
     [SerializeField] private float RunningSpeed;
+    [SerializeField] private List<Enemy> Enemies;
     private bool IsMoving;
     void Start(){
         instance = GetComponent<Environment>();
@@ -18,8 +18,10 @@ public class Environment : MonoBehaviour
     }
 
     public void Move(bool yORn){
-        if(yORn)
-            street.LoadChunks();
         IsMoving = yORn;
+    }
+
+    public Enemy CurrentEnemy(){
+        return Enemies.Count > 0 ? Enemies[0] : null;
     }
 }

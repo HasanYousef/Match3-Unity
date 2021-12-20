@@ -6,6 +6,8 @@ public class GameController : MonoBehaviour {
 	[SerializeField] private StartMenuUI startMenuUI;
 	[SerializeField] private InGameUI inGameUI;
 
+	public Enemy CurrentEnemy;
+
 	void Start () {
 		instance = GetComponent<GameController>();
 		Instantiate(startMenuUI, new Vector3(0, 0, 0), startMenuUI.transform.rotation);
@@ -16,6 +18,7 @@ public class GameController : MonoBehaviour {
 		StartMenuUI.instance.Leave();
 		Player.instance.StartMoving();
 		Instantiate(inGameUI, new Vector3(0, 0, 0), inGameUI.transform.rotation);
+		CurrentEnemy = Environment.instance.CurrentEnemy();
 	}
 
 	public void Match(int numOfMatches){
