@@ -11,10 +11,14 @@ public class Player : MonoBehaviour
     private bool IsPunching = false;
     private bool WaitToFinishLastPunch = false;
     private int PunchsRemaining = 0;
+    [SerializeField] private int Damage;
+    [SerializeField] private int MaxHealth;
+    private int Health;
     void Start()
     {
         instance = GetComponent<Player>();
         animator = GetComponent<Animator>();
+        Health = MaxHealth;
     }
 
     void Update()
@@ -32,7 +36,7 @@ public class Player : MonoBehaviour
                 if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
                     SFXManager.instance.PlaySFX(Clip.Punch);
                     animator.SetTrigger("Punch" + Random.Range(1, 3));
-                    GameController.instance.CurrentEnemy.Punched();
+                    GameController.instance.CurrentEnemy.Punched(Damage);
                     PunchsRemaining--;
                 }
             }
@@ -61,7 +65,17 @@ public class Player : MonoBehaviour
         PunchsRemaining = numOfPunches;
         IsPunching = true;
     }
-    public void Punched(){
+    public void Punched(int damage){
         animator.SetTrigger("Punched");
+        Health -= damage;
+        InGameUI.instance.UpdatePlayerHealth(Health);
+    }
+
+    public int GetHealth(){
+        return Health;
+    }
+
+    public int GetDamage(){
+        return Damage;
     }
 }

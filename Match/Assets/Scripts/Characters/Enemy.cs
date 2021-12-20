@@ -7,11 +7,16 @@ public class Enemy : MonoBehaviour
     private Animator animator;
     private bool IsPunching = false;
     private bool WaitToFinishLastPunch = false;
+    [SerializeField] private int MaxPunchs  = 0;
     private int PunchsRemaining = 0;
+    [SerializeField] private int Damage;
+    [SerializeField] private int MaxHealth;
+    private int Health;
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        Health = MaxHealth;
     }
     void Update()
     {
@@ -35,11 +40,19 @@ public class Enemy : MonoBehaviour
     }
 
     public void Punch(int numOfPunches) {
-        PunchsRemaining = 2;
+        PunchsRemaining = MaxPunchs;
         IsPunching = true;
     }
-    public void Punched(){
-        Debug.Log("ssssss");
+    public void Punched(int damage){
         animator.SetTrigger("Punched");
+        Health -= damage;
+        InGameUI.instance.UpdateEnemyHealth(Health);
+    }
+    public int GetHealth(){
+        return Health;
+    }
+
+    public int GetDamage(){
+        return Damage;
     }
 }

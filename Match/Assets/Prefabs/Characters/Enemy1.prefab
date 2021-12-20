@@ -85,6 +85,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 487568e586eb2564b8cc8c8cf1f6bd70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxPunchs: 2
+  Damage: 18
+  MaxHealth: 120
 --- !u!1 &8108601627876357762
 GameObject:
   m_ObjectHideFlags: 0

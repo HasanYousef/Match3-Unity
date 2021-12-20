@@ -9,6 +9,13 @@ public class InGameUI : MonoBehaviour
 	void Start () {
 		instance = GetComponent<InGameUI>();
         this.name = "InGameUI";
-        SFXManager.instance.PlaySFX(Clip.StartGame);
+    }
+
+    public void UpdateEnemyHealth(int newHealth){
+
+    }
+
+    public void UpdatePlayerHealth(int newHealth){
+        
     }
 }
