@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15e9337cfafd3e541b7c4cbdde907461, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  street: {fileID: 0}
   RunningSpeed: 10
   Enemies:
   - {fileID: 927851335373786556}
@@ -1248,7 +1247,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1847229
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1502,7 +1501,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.1847229
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1637,7 +1636,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.18472052
+      value: 0.195
       objectReference: {fileID: 0}
     - target: {fileID: 8108601627876715174, guid: 179834d73a2f4d74f8db9c0303c8e0ec, type: 3}
       propertyPath: m_LocalPosition.z

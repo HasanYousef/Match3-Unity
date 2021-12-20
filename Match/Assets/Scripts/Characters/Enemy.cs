@@ -46,7 +46,11 @@ public class Enemy : MonoBehaviour
     public void Punched(int damage){
         animator.SetTrigger("Punched");
         Health -= damage;
-        InGameUI.instance.UpdateEnemyHealth(Health);
+        if(Health < 0){
+            Health = 0;
+            Die();
+        }
+        InGameUI.instance.UpdateEnemyHealth(Health, MaxHealth);
     }
     public int GetHealth(){
         return Health;
@@ -54,5 +58,9 @@ public class Enemy : MonoBehaviour
 
     public int GetDamage(){
         return Damage;
+    }
+    
+    public void Die(){
+        animator.SetTrigger("FuckingDie");
     }
 }

@@ -24,7 +24,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 89905d43ba2024049a9644a767cf739e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 506f3e49a1bf05741ae2be46bede0fbb, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -199,7 +199,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions: []
   m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -8704326694673684300}
+  m_DstState: {fileID: 0}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0
@@ -457,7 +457,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Punched
-  m_Speed: 4
+  m_Speed: 1.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3204754502528739370}
@@ -470,7 +470,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 092bab5a41bfbf04f8b98a3186921f90, type: 2}
+  m_Motion: {fileID: 7400000, guid: 53ed72dc60a86344391690374a41ac9b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

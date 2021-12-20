@@ -19,11 +19,13 @@ public class GameController : MonoBehaviour {
 		Player.instance.StartMoving();
 		Instantiate(inGameUI, new Vector3(0, 0, 0), inGameUI.transform.rotation);
 		CurrentEnemy = Environment.instance.CurrentEnemy();
+
 	}
 
 	public void Match(int numOfMatches){
 		Board.instance.setDisable(true);
-		Player.instance.Punch(numOfMatches);
+		Player.instance.StartPunching(numOfMatches);
+		
 	}
 
 	public void FinishedMoving(){

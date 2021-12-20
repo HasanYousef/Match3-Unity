@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        bool isFeelingStronger = animator.GetCurrentAnimatorStateInfo(0).IsName("FeelStronger");
+        bool isIdle = animator.GetCurrentAnimatorStateInfo(0).IsName("Idle");
         if(IsMoving){
             Ray look = new Ray(transform.position, new Vector3(1, 0, 0));
             RaycastHit hit;
@@ -31,9 +33,12 @@ public class Player : MonoBehaviour
                 GameController.instance.FinishedMoving();
             }
         }
-        else if(IsPunching){
+        if(PunchsRemaining > 0 && isFeelingStronger){
+            IsPunching = true;
+        }
+        if(IsPunching){
             if(PunchsRemaining > 0){
-                if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
+                if(isIdle && !animator.IsInTransition(0)){
                     SFXManager.instance.PlaySFX(Clip.Punch);
                     animator.SetTrigger("Punch" + Random.Range(1, 3));
                     GameController.instance.CurrentEnemy.Punched(Damage);
@@ -46,7 +51,7 @@ public class Player : MonoBehaviour
                 GameController.instance.FinishedPunching();
             }
         }
-        else if(WaitToFinishLastPunch && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
+        else if(WaitToFinishLastPunch && isIdle && !animator.IsInTransition(0)){
             WaitToFinishLastPunch = false;
         }
     }
@@ -61,14 +66,18 @@ public class Player : MonoBehaviour
 		Environment.instance.Move(yORn);
     }
 
-    public void Punch(int numOfPunches) {
+    public void StartPunching(int numOfMatches){
+        animator.SetTrigger("FeelStronger");
+        Punch(numOfMatches);
+    }
+
+    private void Punch(int numOfPunches) {
         PunchsRemaining = numOfPunches;
-        IsPunching = true;
     }
     public void Punched(int damage){
         animator.SetTrigger("Punched");
         Health -= damage;
-        InGameUI.instance.UpdatePlayerHealth(Health);
+        InGameUI.instance.UpdatePlayerHealth(Health, MaxHealth);
     }
 
     public int GetHealth(){
