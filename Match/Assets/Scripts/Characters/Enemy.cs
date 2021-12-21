@@ -6,6 +6,7 @@ public class Enemy : MonoBehaviour
 {
     private Animator animator;
     private bool IsPunching = false;
+    private bool IsDead = false;
     private bool WaitToFinishLastPunch = false;
     [SerializeField] private int MaxPunchs  = 0;
     private int PunchsRemaining = 0;
@@ -20,7 +21,13 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        if(IsPunching){
+        if(IsDead){
+            if(animator.GetCurrentAnimatorStateInfo(0).IsName("Die") && !animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8){
+                Environment.instance.CurrentEnemyDied();
+                Destroy(gameObject);
+            }
+        }
+        else if(IsPunching){
             if(PunchsRemaining > 0){
                 if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
                     SFXManager.instance.PlaySFX(Clip.Punch);
@@ -44,11 +51,14 @@ public class Enemy : MonoBehaviour
         IsPunching = true;
     }
     public void Punched(int damage){
-        animator.SetTrigger("Punched");
         Health -= damage;
-        if(Health < 0){
+        if(Health <= 0){
             Health = 0;
-            Die();
+            animator.SetTrigger("Die");
+            IsDead = true;
+        }
+        else {
+            animator.SetTrigger("Punched");
         }
         InGameUI.instance.UpdateEnemyHealth(Health, MaxHealth);
     }
@@ -58,9 +68,5 @@ public class Enemy : MonoBehaviour
 
     public int GetDamage(){
         return Damage;
-    }
-    
-    public void Die(){
-        animator.SetTrigger("FuckingDie");
     }
 }

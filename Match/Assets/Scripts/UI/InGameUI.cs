@@ -20,8 +20,14 @@ public class InGameUI : MonoBehaviour
         PlayerHealthBar = GameObject.Find("PlayerHealthBar").GetComponent<Image>();
         EnemyHealthBar = GameObject.Find("EnemyHealthBar").GetComponent<Image>();
         OriginalBarWidth = PlayerHealthBar.rectTransform.rect.width;
-        UpdatePlayerHealth(Player.instance.GetHealth(), Player.instance.GetHealth());
-        UpdateEnemyHealth(GameController.instance.CurrentEnemy.GetHealth(), GameController.instance.CurrentEnemy.GetHealth());
+        SetHealth();
+    }
+
+    public void SetHealth(){
+        float PHP = Player.instance.GetHealth();
+        float EHP = GameController.instance.CurrentEnemy.GetHealth();
+        UpdatePlayerHealth(PHP, PHP);
+        UpdateEnemyHealth(EHP, EHP);
     }
 
     public void UpdatePlayerHealth(float newHealth, float maxHealth){

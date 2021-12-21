@@ -35,5 +35,16 @@ public class GameController : MonoBehaviour {
 	public void FinishedPunching(){
 		Board.instance.setDisable(false);
 	}
+
+	public void EnemyDied(){
+		CurrentEnemy = Environment.instance.CurrentEnemy();
+		if(CurrentEnemy == null){
+
+		}
+		else{
+			Player.instance.StartMoving();
+			InGameUI.instance.SetHealth();
+		}
+	}
     
 }

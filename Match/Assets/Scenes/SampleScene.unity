@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: cc421da483ed06c49933077a621bff25, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44300675, g: 0.4921974, b: 0.5719251, a: 1}
+  m_IndirectSpecularColor: {r: 0.32711872, g: 0.28171906, b: 0.4167393, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -370,13 +370,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.663414, y: 0.32139376, z: -0.5566704, w: 0.3830222}
-  m_LocalPosition: {x: -6.3, y: 22, z: 10.9}
+  m_LocalRotation: {x: 0.47572997, y: 0.11153304, z: -0.8000366, w: 0.34811327}
+  m_LocalPosition: {x: 0.13, y: -0.51, z: -10.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 120, y: 80, z: 0}
+  m_LocalEulerAnglesHint: {x: 149.358, y: 127.393005, z: 31.604996}
 --- !u!1 &735268000
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,7 +547,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 111962909863631205, guid: fa54e7ba50bf6e44ab3b3b7f48f21d7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.17
+      value: -0.32
       objectReference: {fileID: 0}
     - target: {fileID: 111962909863631205, guid: fa54e7ba50bf6e44ab3b3b7f48f21d7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -772,10 +772,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -7230039412954548209, guid: 730000931cae1454c8083362445e8f75, type: 3}
-      propertyPath: StopDistance
-      value: 0.7
-      objectReference: {fileID: 0}
     - target: {fileID: 2369712856593308033, guid: 730000931cae1454c8083362445e8f75, type: 3}
       propertyPath: m_Name
       value: Player
@@ -790,7 +786,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369712856593335393, guid: 730000931cae1454c8083362445e8f75, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.6950879
+      value: -1.82
       objectReference: {fileID: 0}
     - target: {fileID: 2369712856593335393, guid: 730000931cae1454c8083362445e8f75, type: 3}
       propertyPath: m_LocalPosition.z

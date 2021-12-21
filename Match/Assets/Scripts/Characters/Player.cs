@@ -57,6 +57,9 @@ public class Player : MonoBehaviour
     }
 
     public void StartMoving(){
+        IsPunching = false;
+        WaitToFinishLastPunch = false;
+        PunchsRemaining = 0;
         Move(true);
     }
 

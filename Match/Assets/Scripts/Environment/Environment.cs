@@ -24,4 +24,9 @@ public class Environment : MonoBehaviour
     public Enemy CurrentEnemy(){
         return Enemies.Count > 0 ? Enemies[0] : null;
     }
+
+    public void CurrentEnemyDied(){
+        Enemies.RemoveAt(0);
+        GameController.instance.EnemyDied();
+    }
 }
