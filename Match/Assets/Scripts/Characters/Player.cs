@@ -48,18 +48,23 @@ public class Player : MonoBehaviour
             else{
                 IsPunching = false;
                 WaitToFinishLastPunch = true;
-                GameController.instance.FinishedPunching();
             }
         }
         else if(WaitToFinishLastPunch && isIdle && !animator.IsInTransition(0)){
             WaitToFinishLastPunch = false;
+            GameController.instance.PlayerFinishedPunching();
         }
     }
 
-    public void StartMoving(){
+    public void StopPunching(){
         IsPunching = false;
         WaitToFinishLastPunch = false;
         PunchsRemaining = 0;
+    }
+
+    public void StartMoving(){
+        if(IsPunching || PunchsRemaining > 0)
+            StopPunching();
         Move(true);
     }
 
@@ -67,6 +72,7 @@ public class Player : MonoBehaviour
         IsMoving = yORn;
         animator.SetBool("IsRunning", yORn);
 		Environment.instance.Move(yORn);
+		CameraShake.instance.ShakeThatAss(yORn);
     }
 
     public void StartPunching(int numOfMatches){
@@ -89,5 +95,13 @@ public class Player : MonoBehaviour
 
     public int GetDamage(){
         return Damage;
+    }
+
+    public void Victory(){
+        animator.SetTrigger("Victory");
+    }
+
+    public float GetMaxHealth(){
+        return MaxHealth;
     }
 }

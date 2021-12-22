@@ -32,13 +32,14 @@ public class Enemy : MonoBehaviour
                 if(animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
                     SFXManager.instance.PlaySFX(Clip.Punch);
                     animator.SetTrigger("Punch" + Random.Range(1, 3));
+                    Player.instance.Punched(Damage);
                     PunchsRemaining--;
                 }
             }
             else{
                 IsPunching = false;
                 WaitToFinishLastPunch = true;
-                GameController.instance.FinishedPunching();
+                GameController.instance.EnemyFinishedPunching();
             }
         }
         else if(WaitToFinishLastPunch && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle") && !animator.IsInTransition(0)){
@@ -46,7 +47,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void Punch(int numOfPunches) {
+    public void Punch() {
         PunchsRemaining = MaxPunchs;
         IsPunching = true;
     }
@@ -56,6 +57,7 @@ public class Enemy : MonoBehaviour
             Health = 0;
             animator.SetTrigger("Die");
             IsDead = true;
+            GameController.instance.EnemyIsDying();
         }
         else {
             animator.SetTrigger("Punched");

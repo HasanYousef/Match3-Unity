@@ -72,7 +72,7 @@ public class Item : MonoBehaviour {
 	}
 
 	public void OnClick() {
-		if (Board.instance.IsShifting) return;
+		if (Board.instance.IsShifting || Board.instance.CheckIfDisabled()) return;
 
 		if(InPath()) {
 			if(IsHead()) {

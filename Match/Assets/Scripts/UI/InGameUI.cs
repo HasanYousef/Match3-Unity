@@ -11,6 +11,7 @@ public class InGameUI : MonoBehaviour
     private Text EnemyHealth;
     private Image EnemyHealthBar;
     private float OriginalBarWidth;
+    private bool IsVanishing = false;
 
 	void Start () {
 		instance = GetComponent<InGameUI>();
@@ -23,10 +24,13 @@ public class InGameUI : MonoBehaviour
         SetHealth();
     }
 
+    public void Vanish(){
+        Destroy(gameObject);
+    }
+
     public void SetHealth(){
-        float PHP = Player.instance.GetHealth();
         float EHP = GameController.instance.CurrentEnemy.GetHealth();
-        UpdatePlayerHealth(PHP, PHP);
+        UpdatePlayerHealth(Player.instance.GetHealth(), Player.instance.GetMaxHealth());
         UpdateEnemyHealth(EHP, EHP);
     }
 
