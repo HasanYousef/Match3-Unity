@@ -189,7 +189,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: -511091396891066348, guid: 1046a1a07981c4f4099c497b5458df04, type: 3}
           m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-          m_MethodName: StartGame
+          m_MethodName: StartGamePlease
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 2815052150241336841}
   - component: {fileID: 7698357872630146661}
   m_Layer: 5
-  m_Name: StartMenuUI
+  m_Name: StartMenuUI 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

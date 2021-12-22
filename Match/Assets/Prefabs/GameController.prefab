@@ -43,5 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c3d91bdc37e5cc4398aa2305775a788, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startMenuUI: {fileID: 7698357872630146661, guid: c5080d43cc2520d4197d337467a72917, type: 3}
+  startMenuUI: {fileID: 7698357872630146661, guid: d97c29e489b49c9478e865dfbe849035, type: 3}
+  endMenuUI: {fileID: -820637649106211379, guid: c5080d43cc2520d4197d337467a72917, type: 3}
   inGameUI: {fileID: 3836967436899568980, guid: 8baca8d189b24d1479b4c81970dcdbf5, type: 3}
+  Environments: []
+  CurrentEnemy: {fileID: 0}

@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
     private void Move(bool yORn) {
         IsMoving = yORn;
         animator.SetBool("IsRunning", yORn);
-		Environment.instance.Move(yORn);
+		GameController.instance.GetCurrentEnvironment().Move(yORn);
 		CameraShake.instance.ShakeThatAss(yORn);
     }
 

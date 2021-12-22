@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
     {
         if(IsDead){
             if(animator.GetCurrentAnimatorStateInfo(0).IsName("Die") && !animator.IsInTransition(0) && animator.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.8){
-                Environment.instance.CurrentEnemyDied();
+                GameController.instance.GetCurrentEnvironment().CurrentEnemyDied();
                 Destroy(gameObject);
             }
         }
